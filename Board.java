@@ -9,15 +9,9 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author Harshit
- */
 public class Board extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Board
-     */
+    
     MP3Player mp3player = new MP3Player(getClass().getResource("Harshit.mp3")); 
     public void playMusic(){
         mp3player.play();
@@ -55,8 +49,7 @@ public class Board extends javax.swing.JFrame {
  
         int p = 0;
         for(int i = 0; i < 21; i++,k++){
-            //System.out.println("i : " + i);
-
+            
             arr[p][0] = (60 * k) + space * (k + 1)+3;
             arr[p][1] = 60 * j + space+3;
             if(i == 5 || i == 11 || i == 17){
@@ -67,21 +60,14 @@ public class Board extends javax.swing.JFrame {
             p++;
         }
         for(int i = 0; i < 21; i++){
-            //System.out.print(arr[i][0] + " " + arr[i][1] + "   ");
             if(i == 5 || i == 11 || i == 17){
-               // System.out.println();
+               
             }
         }
         
     }
-    
-
 
     
-
-
-    
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -249,18 +235,11 @@ public class Board extends javax.swing.JFrame {
     }
 
     private void BoardMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BoardMouseClicked
-        // TODO add your handling code here:
         
-        //System.out.println("Clicked");
-        //System.out.println("option one " + arr[option1][0] + " " + arr[option1][1]);
-        //System.out.println("option two " + arr[option2][0] + " " + arr[option2][1]);
-        //System.out.println("option three " + arr[option3][0] + " " + arr[option3][1]);
         xx = evt.getX();
         yy = evt.getY();
-        //System.out.println("xx : " + xx + "  yy : " + yy);
         
         if(apple > 1 && (xx > arr[option1][0] && xx < arr[option1][0]+66 && yy > arr[option1][1] && yy < arr[option1][1]+60)){
-            //System.out.println("Entered One");
             JButton btn = new JButton();
             btn.setSize(60, 60);
             btn.setLocation(arr[option1][0],arr[option1][1]);
@@ -398,12 +377,9 @@ public class Board extends javax.swing.JFrame {
                 turn = 0;
             }
         }
-    }//GEN-LAST:event_BoardMouseClicked
-
+    }
     public void playHarsh(){
-        //System.out.println("No of apple left : " + apple);
         if((apple - 4) % 4 == 0 || apple - 4 == 0) {
-           // System.out.println("Entered Three");
             JButton btn = new JButton();
             btn.setSize(60, 60);
             btn.setLocation(arr[option1][0],arr[option1][1]);
@@ -428,7 +404,6 @@ public class Board extends javax.swing.JFrame {
             option3 -=3;
             apple -=3;
         }else if ((apple - 3) % 4 == 0 || apple - 3 == 0) {
-            //System.out.println("Entered two");
             JButton btn = new JButton();
             btn.setSize(60, 60);
             btn.setLocation(arr[option1][0],arr[option1][1]);
@@ -454,7 +429,6 @@ public class Board extends javax.swing.JFrame {
 
             info.setText("AI has selected 2");
         }else{
-           // System.out.println("Entered One");
             JButton btn = new JButton();
             btn.setSize(60, 60);
             btn.setLocation(arr[option1][0],arr[option1][1]);
@@ -475,7 +449,7 @@ public class Board extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Only one apple left ... Soo sorry...");
             JOptionPane.showMessageDialog(null, "You Lost.. Please exit the game..");
         }
-        //System.out.println("Now apple " + apple);
+        
     }
     
     
