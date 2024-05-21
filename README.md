@@ -1,5 +1,5 @@
 # NIM-GAME
-21 Nim game Rule
+21 Nim game Rule Testing Jenkins
 1. 21 Nim is a mathematical game of strategy in which two players take turns
 removing square from pile .
 2. On each turn a player must remove at least one square .
