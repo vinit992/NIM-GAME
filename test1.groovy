@@ -8,6 +8,7 @@ pipeline {
     }
     environment {
         GIT_URL = "https://github.com/vinit992/NIM-GAME.git"
+        BRANCH_MAIN = "main"
         BRANCH_A = "vinit992-patch-1"
         BRANCH_B = "vinit992-patch-2"
         
@@ -23,6 +24,7 @@ pipeline {
                 script {
                     deleteDir()
                     dir('app') {
+                        echo "Checking......"
                         checkout([$class: 'GitSCM',
                             branches: [[name: '**/tags/**']],
                             doGenerateSubmoduleConfigurations: false,
@@ -45,7 +47,7 @@ pipeline {
                         def currentTag = sh(returnStdout: true, script: "git describe --tags").trim()
                         def branchAStatus = sh(returnStdout: true, returnStatus: true, script: "git branch -a --contains ${currentTag} | grep ${BRANCH_A}")
                         def branchBStatus = sh(returnStdout: true, returnStatus: true, script: "git branch -a --contains ${currentTag} | grep ${BRANCH_B}")
-                        
+                        def branchmainStatus = sh(returnStdout: true, returnStatus: true, script: "git branch -a --contains ${currentTag} | grep ${BRANCH_MAIN}")
                         println "Validating tag: ${currentTag}"
                         
                         if (branchAStatus == 0) {
@@ -54,7 +56,12 @@ pipeline {
                         } else if (branchBStatus == 0) {
                             buildPipeline = 'clusterB'
                             echo "Deployed on cluster B"
-                        } else {
+                        }
+                        else if (branchmainStatus == 0){
+                            buildPipeline = "clustermain"
+                            echo "Deployed on cluster main"
+                        }
+                        else {
                             currentBuild.result = 'ABORTED'
                             error('Tag does not belong to branch A or branch B. Aborted')
                         }
@@ -69,7 +76,8 @@ pipeline {
             }
             steps {
                 script {
-                    build(job: 'ClusterA_Build_Job', wait: false)
+                    echo "Job A"
+                    
                 }
             }
         }
@@ -80,7 +88,17 @@ pipeline {
             }
             steps {
                 script {
-                    build(job: 'ClusterB_Build_Job', wait: false)
+                    echo "Job B"
+                }
+            }
+        }
+        stage('Trigger cluster main Build Pipeline'){
+            when {
+                expression { buildPipeline == 'clustermain'}
+            }
+            steps{
+                script{
+                    echo "Job Main"
                 }
             }
         }
