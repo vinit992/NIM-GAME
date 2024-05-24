@@ -17,7 +17,7 @@ public class Board extends javax.swing.JFrame {
     public void playMusic(){
         mp3player.play();
         mp3player.setRepeat(true);
-        system.out.println("Jenkins Branch main");
+
     }
     public void stopMusic(){
         mp3player.pause();
