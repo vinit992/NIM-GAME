@@ -293,6 +293,7 @@ public class Board extends javax.swing.JFrame {
             
         }else if(apple > 2 && (xx > arr[option2][0] && xx < arr[option2][0] + 66 && yy > arr[option2][1]  && yy < arr[option1][1]+60)){
            // System.out.println("Entered two");
+            system.out.println("Testing Jenkins");
             JButton btn = new JButton();
             btn.setSize(60, 60);
             btn.setLocation(arr[option1][0],arr[option1][1]);
